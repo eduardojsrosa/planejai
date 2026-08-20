@@ -1,7 +1,9 @@
+import { StepProgress } from "./Progress"
+
 export const SimulattionForm = () => {
   return (
-    <div>
-      <h1>Simulation Form</h1>
-    </div>
+    <>
+      <StepProgress currentStep={1} totalSteps={5} />
+    </>
   )
 }
