@@ -92,4 +92,8 @@ export type SimulationFormData = Record<
   string
 >
 
-export type SimulationRecord = SimulationFormData & { id: string, insight?: InsightData }
+export type SimulationRecord = SimulationFormData & {
+  id: string
+  createdAt: string
+  insight?: InsightData
+}

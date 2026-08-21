@@ -7,7 +7,7 @@ export function formatCurrencyMask(value: string): string {
 
   const number = parseInt(digits, 10) / 100
 
-  return number.toLocaleString('pt-BR', {
+  return number.toFixed(2).toLocaleString('pt-BR', {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   })
