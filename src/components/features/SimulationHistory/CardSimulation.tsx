@@ -2,7 +2,7 @@ import { CircleGauge, ExternalLink, Trash2 } from 'lucide-react'
 
 import { Button } from '@/components/shared/Button'
 import type { SimulationRecord } from '@/data/simulation'
-import { formatCurrencyMask, parseCurrency } from '@/utils/currency'
+import { formatCurrencyMask } from '@/utils/currency'
 import { useNavigate } from 'react-router-dom'
 
 type CardSimulationProps = {
@@ -23,13 +23,11 @@ export function CardSimulation({
 }: CardSimulationProps) {
   const navigate = useNavigate()
   
-  const goalAmount = parseCurrency(record.goalAmount)
+  const goalAmount = Number(record.goalAmount)
+  const goalAmountCurrency = formatCurrencyMask(record.goalAmount)
   const goalDeadline = Number(record.goalDeadline)
 
-  const monthlySaving =
-    goalDeadline > 0
-      ? Number((goalAmount / goalDeadline).toFixed(2))
-      : 0
+  const monthlySaving = Number(goalAmount / goalDeadline).toFixed(2)
 
   const formattedDate = record.createdAt
     ? dateFormatter.format(new Date(record.createdAt))
@@ -63,7 +61,7 @@ export function CardSimulation({
             </p>
 
             <p className="mt-1 text-base font-bold text-foreground sm:text-lg">
-              R$ {formatCurrencyMask(goalAmount.toString())}
+              R$ {formatCurrencyMask(goalAmountCurrency.toString())}
             </p>
           </div>
 
@@ -102,7 +100,7 @@ export function CardSimulation({
             icon={ExternalLink}
             onClick={() => void navigate('/resultado/' + record.id)}
           >
-            <span className="hidden sm:inline">Ver detalhes</span>
+            <span>Ver detalhes</span>
           </Button>
         </div>
       </div>
